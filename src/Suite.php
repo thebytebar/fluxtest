@@ -1,21 +1,9 @@
 <?php
 
-/**
- *    __  _____   ___   __          __
- *   / / / /   | <  /  / /   ____ _/ /_  _____
- *  / / / / /| | / /  / /   / __ `/ __ `/ ___/
- * / /_/ / ___ |/ /  / /___/ /_/ / /_/ (__  )
- * `____/_/  |_/_/  /_____/`__,_/_.___/____/
- *
- * @package FireTest
- * @author UA1 Labs Developers https://ua1.us
- * @copyright Copyright (c) UA1 Labs
- */
+namespace TheByteBar\FluxTest;
 
-namespace UA1Labs\Fire\Test;
-
-use \UA1Labs\Fire\TestException;
-use \UA1Labs\Fire\Test\TestCase;
+use \TheByteBar\FluxTest\TestException;
+use \TheByteBar\FluxTest\TestCase;
 use \RecursiveDirectoryIterator;
 use \RecursiveIteratorIterator;
 use \RegexIterator;
@@ -23,59 +11,50 @@ use \RegexIterator;
 /**
  * This class is responsible for running a test suite given.
  */
-class Suite
-{
+class Suite {
 
     /**
      * The directory that the test suite should scan for tests.
-     *
      * @var string
      */
     private $dir;
 
     /**
      * The file extension the test suite should use to deferentiate tests.
-     *
      * @var string
      */
     private $fileExt;
 
     /**
      * An array of classes identified to be ran with this suite.
-     *
      * @var array<string>
      */
     private $testClasses;
 
     /**
      * Total of all tests that passed for the suite.
-     *
      * @var integer
      */
     private $totalPassCount;
 
     /**
      * Total of all tests that have failed for the suite.
-     *
      * @var integer
      */
     private $totalFailCount;
 
     /**
      * An array of the tests that failed.
-     *
      * @var array<string>
      */
     private $allFailedTests;
 
     /**
      * The class constructor.
-     *
      * @param string $dir The directory you would like to run this test suite for
      * @param string $fileExt The file extendion that will indicate FireTest cases
      */
-    public function __construct($dir, $fileExt = '.TestCase.php')
-    {
+    public function __construct($dir, $fileExt = '.TestCase.php') {
         /**
          * Removing warnings because in this library we are doing things that
          * break PHP best practices in order to be able to run our code test
@@ -94,14 +73,14 @@ class Suite
         $this->totalFailCount = 0;
         $this->allFailedTests = [];
 
-        $this->log('*************************************************************');
-        $this->log('███████╗██╗██████╗ ███████╗████████╗███████╗███████╗████████╗');
-        $this->log('██╔════╝██║██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝');
-        $this->log('█████╗  ██║██████╔╝█████╗     ██║   █████╗  ███████╗   ██║   ');
-        $this->log('██╔══╝  ██║██╔══██╗██╔══╝     ██║   ██╔══╝  ╚════██║   ██║   ');
-        $this->log('██║     ██║██║  ██║███████╗   ██║   ███████╗███████║   ██║   ');
-        $this->log('╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝╚══════╝   ╚═╝   ');
-        $this->log('*************************************************************');
+        $this->log('*******************************************************************');
+        $this->log('███████╗██╗     ██╗   ██╗██╗  ██╗████████╗███████╗███████╗████████╗');
+        $this->log('██╔════╝██║     ██║   ██║╚██╗██╔╝╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝');
+        $this->log('█████╗  ██║     ██║   ██║ ╚███╔╝    ██║   █████╗  ███████╗   ██║   ');
+        $this->log('██╔══╝  ██║     ██║   ██║ ██╔██╗    ██║   ██╔══╝  ╚════██║   ██║   ');
+        $this->log('██║     ███████╗╚██████╔╝██╔╝ ██╗   ██║   ███████╗███████║   ██║   ');
+        $this->log('╚═╝     ╚══════╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝   ╚═╝   ');
+        $this->log('*******************************************************************');
         $this->log('[STARTING] Test suite is located at "' . realpath($this->dir) . '"');
         $this->log('[STARTING] Finding all files with the extension "' . $this->fileExt . '"');
         $this->loadTestFiles();
@@ -109,11 +88,9 @@ class Suite
 
     /**
      * The run logic used to run the suite of test cases and tests.
-     *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         foreach($this->testClasses as $testClass) {
             $testClass->setUp();
             $testMethods = $testClass->getTestMethods();
@@ -181,11 +158,9 @@ class Suite
 
     /**
      * Loads tests files from the directory and fileExt configurations.
-     *
      * @return void
      */
-    private function loadTestFiles()
-    {
+    private function loadTestFiles() {
         $rDir = new RecursiveDirectoryIterator($this->dir);
         $iDir = new RecursiveIteratorIterator($rDir);
         $iFiles = new RegexIterator($iDir, '/^.+\\' . $this->fileExt . '$/', RegexIterator::GET_MATCH);
@@ -197,7 +172,7 @@ class Suite
             $declaredAfter = get_declared_classes();
             $loadedClasses = array_diff($declaredAfter, $declaredBefore);
             foreach($loadedClasses as $className) {
-                if (is_subclass_of($className, 'UA1Labs\Fire\Test\TestCase')) {
+                if (is_subclass_of($className, 'TheByteBar\FluxTest\TestCase')) {
                     if (!class_exists($className)) {
                         throw new TestException('Test class "' . $className . '" cannot be found.');
                     }
@@ -214,12 +189,10 @@ class Suite
 
     /**
      * Logs out test that you pass into it.
-     *
      * @param  string $text The text you would like to log out.
      * @return void
      */
-    public static function log($text)
-    {
+    public static function log($text) {
         if (php_sapi_name() === 'cli') {
             echo 'FireTest: ' . $text . "\n";
         } else {
@@ -228,3 +201,5 @@ class Suite
     }
 
 }
+
+// {C} thebytebar.com

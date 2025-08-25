@@ -1,46 +1,29 @@
 <?php
 
-/**
- *    __  _____   ___   __          __
- *   / / / /   | <  /  / /   ____ _/ /_  _____
- *  / / / / /| | / /  / /   / __ `/ __ `/ ___/
- * / /_/ / ___ |/ /  / /___/ /_/ / /_/ (__  )
- * `____/_/  |_/_/  /_____/`__,_/_.___/____/
- *
- * @package FireTest
- * @author UA1 Labs Developers https://ua1.us
- * @copyright Copyright (c) UA1 Labs
- */
+namespace TheByteBar\FluxTest;
 
-namespace Test\UA1Labs\Fire\Test;
-
-use \UA1Labs\Fire\Test\TestCase;
-use \UA1Labs\Fire\TestException;
+use \TheByteBar\FluxTest\TestCase;
+use \TheByteBar\FluxTestException;
 use \PDO;
 
-class TestCaseTestCase extends TestCase
-{
+class TestCaseTestCase extends TestCase {
 
     /**
      * The class we are testing
-     *
-     * @var UA1Labs\Fire\Test\TestCase
+     * @var TheByteBar\FluxTest\TestCase
      */
     private $testCase;
 
-    public function beforeEach()
-    {
+    public function beforeEach() {
         $this->testCase = $this->getMockObject(TestCaseMock::class);
     }
 
-    public function testConstructor()
-    {
+    public function testConstructor() {
         $this->should('Return an instance object of the TestCase object without throwing an exception.');
         $this->assert($this->testCase instanceof TestCase);
     }
 
-    public function testGetMock()
-    {
+    public function testGetMock() {
         $this->should('Throw an exception if the class we are trying to mock does not exists');
         try {
             $mock = $this->testCase->getMockObject('Mock');
@@ -105,31 +88,25 @@ class TestCaseTestCase extends TestCase
 /**
  * Mock class
  */
-class TestCaseMock extends TestCase
-{
+class TestCaseMock extends TestCase {
 
-    public function myPublicMethod()
-    {
+    public function myPublicMethod() {
         return false;
     }
 
-    static public function myStaticPublicMethod()
-    {
+    static public function myStaticPublicMethod() {
         return false;
     }
 
-    protected function myProtectedMethod()
-    {
+    protected function myProtectedMethod() {
         return false;
     }
 
-    private function myPrivateMethod()
-    {
+    private function myPrivateMethod() {
         return false;
     }
 
-    final public function myFinalPublicFunction()
-    {
+    final public function myFinalPublicFunction(){
         return false;
     }
 

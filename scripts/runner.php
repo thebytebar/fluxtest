@@ -1,17 +1,5 @@
 <?php
 
-/**
- *    __  _____   ___   __          __
- *   / / / /   | <  /  / /   ____ _/ /_  _____
- *  / / / / /| | / /  / /   / __ `/ __ `/ ___/
- * / /_/ / ___ |/ /  / /___/ /_/ / /_/ (__  )
- * `____/_/  |_/_/  /_____/`__,_/_.___/____/
- *
- * @package FireTest
- * @author UA1 Labs Developers https://ua1.us
- * @copyright Copyright (c) UA1 Labs
- */
-
 if (php_sapi_name() !== 'cli') {
     http_response_code(404);
     exit();
@@ -24,5 +12,7 @@ $dir = isset($options['dir']) ? $options['dir'] : '/.';
 $fileExt = isset($options['ext']) ? $options['ext'] : '.TestCase.php';
 
 $dir = __DIR__ . '/../../../..' . $dir;
-$suite = new UA1Labs\Fire\Test\Suite($dir, $fileExt);
+$suite = new TheByteBar\FluxTest\Suite($dir, $fileExt);
 $suite->run();
+
+// {C} thebytebar.com

@@ -1,4 +1,7 @@
 # Release Changes
+
+* 3.0.0
+    * Rebrand to `thebytebar/fluxtest`
 * 2.2.0
     * Added capability to mock classes for tests.
     * Added LICENSE

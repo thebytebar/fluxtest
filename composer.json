@@ -1,12 +1,12 @@
 {
-    "name": "ua1-labs/firetest",
-    "version": "2.2.0",
+    "name": "thebytebar/fluxtest",
+    "version": "3.0.0",
     "description": "A Lightweight PHP Testing Framework",
     "license": "MIT",
     "authors": [
         {
-            "name": "UA1 Labs",
-            "email": "development@ua1.us"
+            "name": "TheByteBar Dev Team",
+            "email": "dev@thebytebar.com"
         }
     ],
     "keywords": [
@@ -14,14 +14,7 @@
         "unit",
         "unittest",
         "unit test",
-        "test",
-        "firestudio",
-        "firedb",
-        "firetest",
-        "fire",
-        "ua1labs",
-        "ua1",
-        "ua1-labs"
+        "test"
     ],
     "type": "library",
     "scripts": {
@@ -30,7 +23,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "UA1Labs\\": "UA1Labs/"
+            "TheByteBar\\FluxTest\\": "src/"
         }
     }
 }
