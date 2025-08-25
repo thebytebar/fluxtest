@@ -18,7 +18,9 @@
     ],
     "type": "library",
     "scripts": {
-        "test": "php scripts/test.php"
+        "test": "php scripts/test.php",
+        "build:docs": "npm run build:docs",
+        "start:docs": "php -S localhost:8000 -t docs"
     },
     "require": {},
     "autoload": {
